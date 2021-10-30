@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
@@ -36,20 +37,20 @@ class CustomerOrderServicesImplTest {
     public void getOrdersByDispatchAssignmentStatusTest(){
         CustomerOrder assignedOrder = new CustomerOrder();
         assignedOrder.setStatus(OrderAssigStatus.ASSIGNED);
-        assignedOrder.setTotalOrderAmount(10000d);
+        assignedOrder.setTotalOrderAmount(BigInteger.valueOf(10000));
         assignedOrder.setDeliveryStatus(DeliveryStatus.PENDING);
         assignedOrder.setDeliveryMethod(DeliveryMethod.DOOR_DELIVERY);
         assignedOrder.setDeliveryDate(new Date(28-10-2021));
-        assignedOrder.setDeliveryFee(500d);
+        assignedOrder.setDeliveryFee(BigInteger.valueOf(500));
         orderRepository.save(assignedOrder);
 
         CustomerOrder unassignedOrder = new CustomerOrder();
         unassignedOrder.setStatus(OrderAssigStatus.UNASSIGNED);
-        unassignedOrder.setTotalOrderAmount(10000d);
+        unassignedOrder.setTotalOrderAmount(BigInteger.valueOf(10000));
         unassignedOrder.setDeliveryStatus(DeliveryStatus.PENDING);
         unassignedOrder.setDeliveryMethod(DeliveryMethod.DOOR_DELIVERY);
         unassignedOrder.setDeliveryDate(new Date(29-10-2021));
-        unassignedOrder.setDeliveryFee(700d);
+        unassignedOrder.setDeliveryFee(BigInteger.valueOf(700));
         orderRepository.save(unassignedOrder);
 
         int pageNo = 0;

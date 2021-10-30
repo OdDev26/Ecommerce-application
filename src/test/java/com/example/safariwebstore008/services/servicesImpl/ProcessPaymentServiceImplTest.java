@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.ContextConfiguration;
 
+import java.math.BigInteger;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -52,7 +53,7 @@ class ProcessPaymentServiceImplTest {
                 .getPrincipal()).thenReturn(userDetails);
         Mockito.when(userRepository.findUserByEmail(any())).thenReturn(Optional.of(user));
 
-        checkoutDto.setTotalOrderAmount(17000D);
+        checkoutDto.setTotalOrderAmount(BigInteger.valueOf(7000));
 
         ProcessPaymentDTO paymentDTO = new ProcessPaymentDTO();
         paymentDTO.setEmail(user.getEmail());

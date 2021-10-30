@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,16 +23,18 @@ public class CustomerOrder extends BaseClass {
     private Date deliveryDate;
     @Enumerated(EnumType.STRING)
     private DeliveryStatus deliveryStatus;
-    private Double deliveryFee;
+    private BigInteger deliveryFee;
     @ManyToOne
     private ShippingAddress shippingAddress;
     @Enumerated(EnumType.STRING)
     private OrderAssigStatus status;
     @Enumerated(EnumType.STRING)
     private DeliveryMethod deliveryMethod;
-    private Double totalOrderAmount;
+    private BigInteger totalOrderAmount;
     @ManyToOne
     @JsonIgnore
     private User userModel;
+    @OneToMany
+    private List<OrderDetails> orderDetailsList;
 
 }

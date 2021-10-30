@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+
 
 @Service
 public class ProcessPaymentServiceImpl implements ProcessPaymentService {
@@ -32,7 +34,7 @@ public class ProcessPaymentServiceImpl implements ProcessPaymentService {
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
 
-        Double amount = checkoutDto.getTotalOrderAmount();
+        BigInteger amount = checkoutDto.getTotalOrderAmount();
         ProcessPaymentDTO processPaymentDTO = new ProcessPaymentDTO();
 
         processPaymentDTO.setEmail(email);

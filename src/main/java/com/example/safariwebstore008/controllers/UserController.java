@@ -69,8 +69,10 @@ public class UserController {
 
   
     @PostMapping("/checkout")
-    private ResponseEntity<?> createACustomerOrder(@RequestBody CheckoutDto checkoutDto){
-       CustomerOrder customerOrder=customerOrderService.createACustomerOrder(checkoutDto);
+    private ResponseEntity<?> createACustomerOrder(@RequestBody CheckoutDto checkoutDto,HttpServletRequest request){
+        String token = request.getHeader("Authorization").substring(7);
+        String email = jwtTokenUtil.getUserEmailFromToken(token);
+       CustomerOrder customerOrder=customerOrderService.createACustomerOrder(checkoutDto,email);
        if(customerOrder!=null){
        return new ResponseEntity<>(customerOrder,HttpStatus.CREATED);
        }else{

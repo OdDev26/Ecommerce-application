@@ -1,14 +1,9 @@
 package com.example.safariwebstore008.dto;
 
 import com.example.safariwebstore008.enums.Gender;
-import com.example.safariwebstore008.enums.Roles;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -18,9 +13,8 @@ public class RegistrationDto {
     private String firstName;
     private String lastName;
     private String email;
+    @Size(min = 8,message = "The password character is less than 8")
     private String password;
     private Date dateOfBirth;
-    private Gender gender;
-
-
+    private String gender;
 }

@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -18,7 +19,8 @@ import java.util.Date;
 @Data
 @Entity
 @AllArgsConstructor
-@Table(name = "users_table")
+@Table(name = "users_table", uniqueConstraints = @UniqueConstraint(name = "UniqueEmail", columnNames = "email")
+)
 public  class User extends BaseClass {
 
     @NotEmpty(message = "first-name field is empty")
@@ -33,7 +35,6 @@ public  class User extends BaseClass {
 
     @Email( message = "email field is not properly formatted")
     @NotEmpty(message = "email field is empty")
-    @Column(unique = true)
     private  String email;
 
     @NotEmpty(message = "gender field is empty")
@@ -42,7 +43,7 @@ public  class User extends BaseClass {
     @Enumerated(EnumType.STRING)
     private Roles roles;
     @NotEmpty(message = "password field is empty")
-    @Size(min = 8,message = "The password character is less than 8")
+    @Valid
     private String password;
     private Boolean isEnabled;
 

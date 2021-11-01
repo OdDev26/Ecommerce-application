@@ -7,12 +7,14 @@ import com.example.safariwebstore008.services.AdminService;
 import com.example.safariwebstore008.services.CloudinaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
 
 @RestController
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(path = "/api/admin/")
 public class AdminController {
 

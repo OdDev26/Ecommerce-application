@@ -1,6 +1,5 @@
 # .github/workflows/main.yml
-
-name: Deploy
+name: Deploy to Heroku
 
 on:
   push:
@@ -8,29 +7,12 @@ on:
       - main
 
 jobs:
-  custom-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          fetch-depth: 0
-      - name: Heroku login credentials
-        run: |
-          cat > ~/.netrc <<EOF
-            machine api.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-            machine git.heroku.com
-              login $HEROKU_EMAIL
-              password $HEROKU_API_KEY
-          EOF
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
-
-      - name: Push to Heroku
-        run: |
-          heroku create
-          git push heroku main
-        
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: safari-webstore-sq008 #Must be unique in Heroku
+          heroku_email: safariclothingstore08@gmail.com

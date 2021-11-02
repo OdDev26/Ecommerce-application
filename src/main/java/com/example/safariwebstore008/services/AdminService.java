@@ -16,4 +16,7 @@ public interface AdminService {
 
     ProductImages saveToDB(String imageUrl, Long productId);
 
+    Product updateProduct(Long id, ProductDto products);
+
+    void deleteProduct(Long id);
 }

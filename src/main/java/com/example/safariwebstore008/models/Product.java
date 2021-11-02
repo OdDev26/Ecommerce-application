@@ -2,16 +2,15 @@ package com.example.safariwebstore008.models;
 
 import com.example.safariwebstore008.common.BaseClass;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.math.BigInteger;
-import java.util.List;
 
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

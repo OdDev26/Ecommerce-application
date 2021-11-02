@@ -1,13 +1,9 @@
 package com.example.safariwebstore008.dto;
 
-import com.example.safariwebstore008.models.ProductCategory;
-import com.example.safariwebstore008.models.ProductSubCategory;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import java.math.BigInteger;
 
-
+@Builder
 @Data
 public class ProductDto {
 

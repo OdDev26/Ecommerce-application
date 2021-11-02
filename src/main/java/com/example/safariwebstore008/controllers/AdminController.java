@@ -40,4 +40,15 @@ public class AdminController {
         Long productId = product.getId();
         return ResponseEntity.ok(adminService.saveToDB(url, productId));
     }
+
+    @RequestMapping(value = "updateProduct/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateProduct(@PathVariable("id") Long id, @RequestBody ProductDto product) {
+        return ResponseEntity.ok(adminService.updateProduct(id, product));
+    }
+
+    @RequestMapping(value = "deleteProduct/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id) {
+        adminService.deleteProduct(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -9,11 +9,11 @@ import com.example.safariwebstore008.services.AdminService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -93,11 +93,16 @@ public class AdminServiceImpl implements AdminService {
         Optional<Product> optionalProduct = productRepository
                 .findById(productId);
         if (optionalProduct.isPresent()) {
-            productImages.setProduct(optionalProduct.get());
+            Product product = optionalProduct.get();
+            List <ProductImages> images = product.getImageList();
+            images.add(productImages);
+            product.setImageList(images);
+            imageRepository.save(productImages);
+            productRepository.save(product);
         } else {
             throw new CustomAppException("Product not existing");
         }
-        return imageRepository.save(productImages);
+        return productImages;
     }
 
     @Override
